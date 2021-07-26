@@ -58,8 +58,8 @@ function tpnextrasplugin_shortcode_covid19_cases_chart() {
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datasource@0.1.0"></script>
 <!--<script src="http://pittnews.com/wp-content/plugins/tpn-extras-plugin/casecount-graph.js?ver=1.2"></script>-->
 <canvas id="tpn-casecount-graph"></canvas>
-<span style="font-weight: 400;"><i>Data collected by The Pitt News. Archival data by Spotlight PA and the Philadelphia Inquirer.</i></span>
-<span style="font-weight: 400;"><i>Graph by Jon Moss and Ryan Yang, The Pitt News Staff.</i></span>
+<span style="font-weight: 400;"><i>Data collected by The Pitt News. Original data collection by Ryan Yang, Online Visual Editor. Archival data by Spotlight PA and the Philadelphia Inquirer.</i></span>
+<span style="font-weight: 400;"><i>Graph by Jon Moss, Editor-in-Chief.</i></span>
 <!-- END CHART -->
 ';
 }
