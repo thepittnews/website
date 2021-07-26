@@ -25,11 +25,11 @@ for($i = 1; $i <= count($rows); $i++) {
 //foreach($rows as $row) {
   //if ($i == 0) continue;
   if (strpos($rows[$i][0], '2020') !== false) {
-    $dates_arr[] = explode("/2020", $rows[$i][0])[0];
+    $dates_arr[] = explode("/2020", $rows[$i][0])[0] . "/20";
   }
 
   if (strpos($rows[$i][0], '2021') !== false) {
-    $dates_arr[] = explode("/2021", $rows[$i][0])[0];
+    $dates_arr[] =  explode("/2021", $rows[$i][0])[0] . "/21";
   }
 
   //if (empty($row[1])) {
@@ -52,7 +52,7 @@ for($i = 1; $i <= count($rows); $i++) {
 }
 
 // Stop axes where data ends
-$stop_index = array_search(date('n/j'), $dates_arr, true);
+$stop_index = array_search(date('n/j/y'), $dates_arr, true);
 
 $dates_arr = array_slice($dates_arr, 0, $stop_index + 1, true);
 $rows = array_slice($rows, 0, $stop_index + 1, true);
