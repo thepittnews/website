@@ -4,11 +4,11 @@
  */
 
 function tpnextrasplugin_rest_get_custom_fields($object, $field_name, $request) {
-  return get_post_meta($object['id'])[$field_name];
-
-  //$thumbnail_photographer = get_post_meta(get_post_thumbnail_id($post_id), 'photographer', true);
-  //$returnObj = (object) ['photocredit' => $thumbnail_photographer];
-  //return $returnObj;
+  if ($field_name == "writer" || $field_name == "jobtitle") {
+    return get_post_meta($object['id'])[$field_name];
+  } else if ($field_name == "photographer") {
+    return get_post_meta(get_post_thumbnail_id($post_id), 'photographer', true);
+  }
 }
 
 function tpnextrasplugin_rest_update_custom_fields($value, $object, $field_name, $request) {
@@ -40,6 +40,16 @@ function tpnextrasplugin_rest_add_custom_fields() {
   register_rest_field(
   'post',
   'jobtitle',
+  array(
+      'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
+      'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
+      'schema'          => null,
+       )
+  );
+
+  register_rest_field(
+  'post',
+  'photographer',
   array(
       'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
       'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
