@@ -74,6 +74,23 @@ function tpnextrasplugin_shortcode_covid19_cases_chart() {
 ';
 }
 
+//[tpnextrasplugin_charlottechamps_teaser]
+function tpnextrasplugin_shortcode_charlottechamps_teaser() {
+  return '
+<section>
+  <div class="widget_text widgetwrap sno-animate already-visible come-in" style="visibility: visible;">
+    <div class="textwidget custom-html-widget">
+      <div class="sno-widget-style-4-wrap">
+        <div class="widget4 widgettitle" role="heading" style="background: #003594;">
+          <a href="https://pittnews.com/champs/" target="_blank" rel="noopener">Road to ACC Champs: Complete coverage from Charlotte</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+';
+}
+
 /**
  * Activate the plugin.
  */
@@ -84,6 +101,8 @@ wp_enqueue_script('casecount-graph', plugin_dir_url( __FILE__ ) . 'casecount-gra
 add_shortcode('tpnextrasplugin_covid19_cases_chart', 'tpnextrasplugin_shortcode_covid19_cases_chart');
 
 wp_enqueue_script('election2020-maps', plugin_dir_url( __FILE__ ) . 'election2020-maps.js', array(), 1.3, false);
+
+add_shortcode('tpnextrasplugin_charlottechamps_teaser', 'tpnextrasplugin_shortcode_charlottechamps_teaser');
 //}
 //register_activation_hook( __FILE__, 'tpnextrasplugin_activate' );
 ?>
