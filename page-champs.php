@@ -2,6 +2,9 @@
 /**
  *  Template Name: ACC Champs
 */
+
+$thumbnail_id = get_post_thumbnail_id($post->ID);
+$photographer = get_post_meta($thumbnail_id, 'photographer', true);
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +34,7 @@
     <meta property="article:publisher" content="https://www.facebook.com/thepittnews/" />
     <meta property="article:published_time" content="<?php echo get_the_date('c'); ?>" />
     <meta property="article:modified_time" content="<?php echo the_modified_date('c'); ?>" />
-    <meta property="og:image" content="https://pittnews.com/wp-content/uploads/2021/11/footballunc-2.jpg" />
+    <meta property="og:image" content="<?php the_post_thumbnail_url('full'); ?>" />
     <meta property="og:image:width" content="1500" />
     <meta property="og:image:height" content="1200" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -110,7 +113,7 @@
         width: 100%;
         height: 100vh;
         object-fit: cover;
-        object-position: center;
+        object-position: top;
       }
 
       .aligncenter { margin: 0 auto; text-align: center; }
@@ -148,13 +151,13 @@
       </nav>
     </div>
 
-    <img class="header-image" src="https://pittnews.com/wp-content/uploads/2021/11/footballunc-2.jpg" />
+    <img class="header-image" src="<?php the_post_thumbnail_url('full'); ?>" />
 
     <div class="section white">
       <h4 id="story-title"><?php the_title(); ?></h4>
       <div class="container">
         <span class="author-info"> Written by The Pitt News Sports Staff</span><br/>
-        <span class="author-info">Feature photo by Hannah Wilson | Staff Photographer</span><br/>
+        <span class="author-info">Feature photo by <?php echo $photographer; ?></span><br/>
         <span class="author-info">Page design by Jon Moss | Editor-in-Chief</span><br/>
       </div>
     </div>
@@ -165,7 +168,7 @@
           <div class="col s12 m11">
             <?php the_content(); ?>
             <br />
-            <h4>Catch up on news from throughout the season:</h4>
+            <h4>The latest from Charlotte and the postseason:</h4>
           </div>
         </div>
 
@@ -175,6 +178,51 @@
               'category_name' => 'Football',
               'date_query' => array(
                 array(
+                  'after' => 'December 3, 2021',
+                  'inclusive' => true,
+                ),
+              ),
+              'nopaging' => true
+            ));
+
+            if ($stories->have_posts()) {
+              $i = 0;
+              while ($stories->have_posts()) {
+                $stories->the_post();
+
+                if ($i % 3 == 0) { ?><div class="row"><?php } ?>
+                  <div class="col s8 m4">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="<?php the_post_thumbnail_url('large'); ?>">
+                      </div>
+                      <div class="card-content">
+                        <span class="card-title" style="line-height: inherit"><a target="_blank" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
+                        <br />
+                        <?php echo get_the_date('F j, Y'); ?>
+                      </div>
+                    </div>
+                  </div>
+                <?php if ($i % 3 == 2) { ?></div> <?php } ?>
+              <?php
+              $i++;
+              }
+            }
+          ?>
+
+        <div class="row">
+          <div class="col s12 m11">
+            <h4>Catch up on news from throughout the regular season:</h4>
+          </div>
+        </div>
+
+          <?php
+            $stories = new WP_Query();
+            $stories->query(array(
+              'category_name' => 'Football',
+              'date_query' => array(
+                array(
+                  'before' => 'December 3, 2021',
                   'after' => 'August 6, 2021',
                   'inclusive' => true,
                 ),
