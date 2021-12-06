@@ -3,8 +3,9 @@
  *  Template Name: ACC Champs
 */
 
-$thumbnail_id = get_post_thumbnail_id($post->ID);
-$photographer = get_post_meta($thumbnail_id, 'photographer', true);
+$featured_image_id = get_post_thumbnail_id($post->ID);
+$featured_image_info = wp_get_attachment_image_src($featured_image_id, 'full');
+$photographer = get_post_meta($featured_image_id, 'photographer', true);
 ?>
 
 <!DOCTYPE html>
@@ -35,8 +36,8 @@ $photographer = get_post_meta($thumbnail_id, 'photographer', true);
     <meta property="article:published_time" content="<?php echo get_the_date('c'); ?>" />
     <meta property="article:modified_time" content="<?php echo the_modified_date('c'); ?>" />
     <meta property="og:image" content="<?php the_post_thumbnail_url('full'); ?>" />
-    <meta property="og:image:width" content="1500" />
-    <meta property="og:image:height" content="1200" />
+    <meta property="og:image:width" content="<?php echo $featured_image_info[1]; ?>" />
+    <meta property="og:image:height" content="<?php echo $featured_image_info[2]; ?>" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@thepittnews" />
     <meta name="twitter:site" content="@thepittnews" />
