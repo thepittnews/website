@@ -82,7 +82,7 @@ function tpnextrasplugin_shortcode_charlottechamps_teaser() {
     <div class="textwidget custom-html-widget">
       <div class="sno-widget-style-4-wrap">
         <div class="widget4 widgettitle" role="heading" style="background: #003594;">
-          <a href="https://pittnews.com/champs/" target="_blank" rel="noopener">Road to ACC Champs: Complete coverage from Charlotte</a>
+          <a href="https://pittnews.com/champs/" target="_blank" rel="noopener" style="text-transform: initial;">Road to ACC Champs: Complete coverage of the historic season</a>
         </div>
       </div>
     </div>
