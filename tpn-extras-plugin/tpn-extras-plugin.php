@@ -91,6 +91,164 @@ function tpnextrasplugin_shortcode_charlottechamps_teaser() {
 ';
 }
 
+function tpnextrasplugin_shortcode_newsletterform() {
+  return '
+<style>
+  .tpn-newsletter-widget-container {
+    width: 40%;
+    float: right;
+  }
+
+  @media (max-width: 768px) {
+    .tpn-newsletter-widget-container {
+      display: none;
+    }
+  }
+
+  #tpn-newsletter-widget {
+    background: #ececec;
+    line-height: 30px;
+    text-transform: initial;
+    color: black;
+    font-family: Roboto !important;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.5em;
+  }
+
+  #tpn-newsletter-widget .adredux {
+    display: none;
+  }
+
+  .tpn-newsletter-widget-formwrap {
+    display: inline-table;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: inherit;
+  }
+
+  .tpn-newsletter-widget-emailinput {
+    border: 1px solid #CCC;
+    color: rgba(0,0,0,0.75);
+    padding: 8px;
+    margin-bottom: 15px;
+    display: table-cell;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    width: auto;
+    position: relative;
+    z-index: 2;
+    float: left;
+    vertical-align: middle;
+  }
+
+  .tpn-newsletter-widget-submitwrap {
+    width: auto;
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+  }
+
+  .tpn-newsletter-widget-submit {
+    z-index: 2;
+    margin-left: -1px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    position: relative;
+    padding: 8px;
+    color: #fff;
+    background-color: rgb(31, 132, 200);
+    border-color: black;
+  }
+</style>
+
+<script>
+  jQuery(document).on("ready", function() {
+    jQuery("#tpn-newsletter-widget-form").submit(function(e) {
+      var $form = jQuery("#tpn-newsletter-widget-form");
+      e.preventDefault();
+
+      jQuery.ajax({
+        type: "POST",
+        url: $form.attr("action"),
+        data: $form.serialize(),
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data) {
+          if (data.result != "success") {
+            var message = data.msg || "Sorry, unable to subscribe. Please try again later!";
+            if (data.msg && data.msg.indexOf("already subscribed") >= 0) {
+              message = "You`re already subscribed. Thank you!";
+            }
+            alert(message);
+          } else {
+            alert("Thanks for subcribing!");
+          }
+
+          jQuery(".tpn-newsletter-widget-emailinput").val("");
+        }
+      });
+    });
+  });
+</script>
+
+<section class="tpn-newsletter-widget-container">
+  <div class="widget_text widgetwrap sno-animate already-visible come-in" style="visibility: visible;">
+    <div class="textwidget custom-html-widget">
+      <div class="sno-widget-style-4-wrap" style="padding-top: 0px !important;">
+        <div class="widget4" id="tpn-newsletter-widget">
+          <p style="padding-top: 10px;"><b>Sign up for our newsletter</b></p>
+          <div style="padding-bottom: 0px;">
+            <p>Get Pitt and Oakland news in your inbox three times a week.</p>
+            <div class="tpn-newsletter-widget-formwrap">
+              <form id="tpn-newsletter-widget-form" action="https://pittnews.us11.list-manage.com/subscribe/post-json?c=?">
+                <input type="hidden" name="u" value="c0117f421e52dd3dc7645e204">
+                <input type="hidden" name="id" value="773522d448">
+                <input class="tpn-newsletter-widget-emailinput" type="email" name="MERGE0" id="MERGE0" placeholder="Email">
+                <span class="tpn-newsletter-widget-submitwrap">
+                  <input class="tpn-newsletter-widget-submit" type="submit" id="" name="submit" value="Subscribe">
+                </span>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+';
+}
+
+function tpnextrasplugin_shortcode_newsletterform_insert($content) {
+  $newsletter_form = tpnextrasplugin_shortcode_newsletterform();
+  $post_id = get_the_ID();
+  $paragraph_id = 5;
+
+  if (is_single() && ! is_admin() && $post_id == 169312 && get_post_meta($post_id, 'sno_format', true) != 'Long-Form') {
+    $closing_p = '</p>';
+    $paragraphs = explode($closing_p, $content);
+
+    if (count($paragraphs) > $paragraph_id) {
+      foreach ($paragraphs as $index => $paragraph) {
+        if (trim($paragraph)) {
+          $paragraphs[$index] .= $closing_p;
+        }
+
+        if ($index + 1 == $paragraph_id) {
+          $paragraphs[$index] .= $newsletter_form;
+        }
+      }
+    }
+
+    return implode('', $paragraphs);
+  }
+
+  return $content;
+}
+
 /**
  * Activate the plugin.
  */
@@ -103,6 +261,10 @@ add_shortcode('tpnextrasplugin_covid19_cases_chart', 'tpnextrasplugin_shortcode_
 wp_enqueue_script('election2020-maps', plugin_dir_url( __FILE__ ) . 'election2020-maps.js', array(), 1.3, false);
 
 add_shortcode('tpnextrasplugin_charlottechamps_teaser', 'tpnextrasplugin_shortcode_charlottechamps_teaser');
+
+add_shortcode('tpnextrasplugin_newsletterform', 'tpnextrasplugin_shortcode_newsletterform');
+add_filter('the_content', 'tpnextrasplugin_shortcode_newsletterform_insert');
+
 //}
 //register_activation_hook( __FILE__, 'tpnextrasplugin_activate' );
 ?>
