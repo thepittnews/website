@@ -227,7 +227,7 @@ function tpnextrasplugin_shortcode_newsletterform_insert($content) {
   $post_id = get_the_ID();
   $paragraph_id = 5;
 
-  if (is_single() && ! is_admin() && $post_id == 169312 && get_post_meta($post_id, 'sno_format', true) != 'Long-Form') {
+  if (is_single() && ! is_admin() && get_post_meta($post_id, 'sno_format', true) != 'Long-Form') {
     $closing_p = '</p>';
     $paragraphs = explode($closing_p, $content);
 
