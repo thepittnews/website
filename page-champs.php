@@ -114,7 +114,7 @@ $photographer = get_post_meta($featured_image_id, 'photographer', true);
         width: 100%;
         height: 100vh;
         object-fit: cover;
-        object-position: top;
+       <?php if ($featured_image_id != 168796) { echo "object-position: top;"; } ?>
       }
 
       .aligncenter { margin: 0 auto; text-align: center; }
