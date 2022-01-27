@@ -1,6 +1,8 @@
 <?php
 /**
  * Plugin Name: TPN Extras Plugin
+ * Version: 0.1
+ * Author: Jon Moss
  */
 
 function tpnextrasplugin_rest_get_custom_fields($object, $field_name, $request) {
@@ -19,7 +21,7 @@ function tpnextrasplugin_rest_update_custom_fields($value, $object, $field_name,
   if ($field_name == "writer") {
     delete_post_meta($object->ID, "writer");
     foreach ($request["writer"] as $writer) {
-        add_post_meta($object->ID, "writer", $writer);
+      add_post_meta($object->ID, "writer", $writer);
     }
   } else {
     return update_post_meta($object->ID, $field_name, $value);
@@ -31,30 +33,30 @@ function tpnextrasplugin_rest_add_custom_fields() {
   'post',
   'writer',
   array(
-      'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
-      'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
-      'schema'          => null,
-       )
+    'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
+    'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
+    'schema'          => null,
+     )
   );
 
   register_rest_field(
   'post',
   'jobtitle',
   array(
-      'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
-      'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
-      'schema'          => null,
-       )
+    'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
+    'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
+    'schema'          => null,
+     )
   );
 
   register_rest_field(
   'post',
   'photographer',
   array(
-      'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
-      'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
-      'schema'          => null,
-       )
+    'get_callback'    => 'tpnextrasplugin_rest_get_custom_fields',
+    'update_callback' => 'tpnextrasplugin_rest_update_custom_fields',
+    'schema'          => null,
+     )
   );
 }
 
