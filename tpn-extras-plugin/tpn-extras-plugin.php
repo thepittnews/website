@@ -209,7 +209,7 @@ function tpnextrasplugin_shortcode_newsletterform() {
               <form id="tpn-newsletter-widget-form" action="https://pittnews.us11.list-manage.com/subscribe/post-json?c=?">
                 <input type="hidden" name="u" value="c0117f421e52dd3dc7645e204">
                 <input type="hidden" name="id" value="773522d448">
-                <input class="tpn-newsletter-widget-emailinput" type="email" name="MERGE0" id="MERGE0" placeholder="Email">
+                <input class="tpn-newsletter-widget-emailinput" type="email" name="MERGE0" id="MERGE0" placeholder="Email" autocomplete="email">
                 <span class="tpn-newsletter-widget-submitwrap">
                   <input class="tpn-newsletter-widget-submit" type="submit" id="" name="submit" value="Subscribe">
                 </span>
