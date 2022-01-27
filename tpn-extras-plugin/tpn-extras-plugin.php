@@ -202,7 +202,7 @@ function tpnextrasplugin_shortcode_newsletterform() {
     <div class="textwidget custom-html-widget">
       <div class="sno-widget-style-4-wrap" style="padding-top: 0px !important;">
         <div class="widget4" id="tpn-newsletter-widget">
-          <p style="padding-top: 10px;"><b>Join our newsletter</b></p>
+          <p style="padding-top: 10px; padding-bottom: 10px;"><b>Join our newsletter</b></p>
           <div style="padding-bottom: 0px;">
             <p>Get Pitt and Oakland news in your inbox, three times a week.</p>
             <div class="tpn-newsletter-widget-formwrap">
