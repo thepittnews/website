@@ -233,7 +233,7 @@ function tpnextrasplugin_shortcode_newsletterform_insert($content) {
     $closing_p = '</p>';
     $paragraphs = explode($closing_p, $content);
 
-    if (count($paragraphs) > $paragraph_id) {
+    if (count($paragraphs) - 1 > $paragraph_id) {
       foreach ($paragraphs as $index => $paragraph) {
         if (trim($paragraph)) {
           $paragraphs[$index] .= $closing_p;
