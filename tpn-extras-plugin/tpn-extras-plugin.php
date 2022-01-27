@@ -202,9 +202,9 @@ function tpnextrasplugin_shortcode_newsletterform() {
     <div class="textwidget custom-html-widget">
       <div class="sno-widget-style-4-wrap" style="padding-top: 0px !important;">
         <div class="widget4" id="tpn-newsletter-widget">
-          <p style="padding-top: 10px;"><b>Sign up for our newsletter</b></p>
+          <p style="padding-top: 10px;"><b>Join our newsletter</b></p>
           <div style="padding-bottom: 0px;">
-            <p>Get Pitt and Oakland news in your inbox three times a week.</p>
+            <p>Get Pitt and Oakland news in your inbox, three times a week.</p>
             <div class="tpn-newsletter-widget-formwrap">
               <form id="tpn-newsletter-widget-form" action="https://pittnews.us11.list-manage.com/subscribe/post-json?c=?">
                 <input type="hidden" name="u" value="c0117f421e52dd3dc7645e204">
