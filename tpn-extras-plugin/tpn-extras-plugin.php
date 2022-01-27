@@ -96,14 +96,21 @@ function tpnextrasplugin_shortcode_charlottechamps_teaser() {
 function tpnextrasplugin_shortcode_newsletterform() {
   return '
 <style>
-  .tpn-newsletter-widget-container {
-    width: 40%;
-    float: right;
-  }
-
   @media (max-width: 768px) {
     .tpn-newsletter-widget-container {
-      display: none;
+      margin: auto;
+      width: 75vw;
+    }
+
+    #tpn-newsletter-widget-cta2 {
+      font-size: 1.2em;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .tpn-newsletter-widget-container {
+      width: 40%;
+      float: right;
     }
   }
 
@@ -128,6 +135,11 @@ function tpnextrasplugin_shortcode_newsletterform() {
     font-size: 14px;
     font-weight: normal;
     font-family: inherit;
+  }
+
+  #tpn-newsletter-widget-cta1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .tpn-newsletter-widget-emailinput {
@@ -202,9 +214,9 @@ function tpnextrasplugin_shortcode_newsletterform() {
     <div class="textwidget custom-html-widget">
       <div class="sno-widget-style-4-wrap" style="padding-top: 0px !important;">
         <div class="widget4" id="tpn-newsletter-widget">
-          <p style="padding-top: 10px; padding-bottom: 10px;"><b>Join our newsletter</b></p>
+          <p id="tpn-newsletter-widget-cta1"><b>Join our newsletter</b></p>
           <div style="padding-bottom: 0px;">
-            <p>Get Pitt and Oakland news in your inbox, three times a week.</p>
+            <p id="tpn-newsletter-widget-cta2">Get Pitt and Oakland news in your inbox, three times a week.</p>
             <div class="tpn-newsletter-widget-formwrap">
               <form id="tpn-newsletter-widget-form" action="https://pittnews.us11.list-manage.com/subscribe/post-json?c=?">
                 <input type="hidden" name="u" value="c0117f421e52dd3dc7645e204">
