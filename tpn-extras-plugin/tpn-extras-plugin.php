@@ -269,10 +269,7 @@ function tpnextrasplugin_shortcode_newsletterform_insert($content) {
 //function tpnextrasplugin_activate() {
 tpnextrasplugin_rest_add_custom_fields();
 
-wp_enqueue_script('casecount-graph', plugin_dir_url( __FILE__ ) . 'casecount-graph.js', array(), 1.2, false);
 add_shortcode('tpnextrasplugin_covid19_cases_chart', 'tpnextrasplugin_shortcode_covid19_cases_chart');
-
-wp_enqueue_script('election2020-maps', plugin_dir_url( __FILE__ ) . 'election2020-maps.js', array(), 1.3, false);
 
 add_shortcode('tpnextrasplugin_charlottechamps_teaser', 'tpnextrasplugin_shortcode_charlottechamps_teaser');
 
