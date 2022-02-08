@@ -237,15 +237,20 @@ function tpnextrasplugin_shortcode_newsletterform() {
 }
 
 function tpnextrasplugin_shortcode_newsletterform_insert($content) {
-  $newsletter_form = tpnextrasplugin_shortcode_newsletterform();
   $post_id = get_the_ID();
-  $paragraph_id = 4;
 
   if (is_single() && ! is_admin() && get_post_meta($post_id, 'sno_format', true) != 'Long-Form') {
+    $newsletter_form = tpnextrasplugin_shortcode_newsletterform();
     $closing_p = '</p>';
+
     $paragraphs = explode($closing_p, $content);
+    $paragraph_id = 4;
 
     if (count($paragraphs) - 1 > $paragraph_id) {
+      if (str_contains($paragraphs[$paragraph_id], 'img')) {
+        $paragraph_id = 6;
+      }
+
       foreach ($paragraphs as $index => $paragraph) {
         if (trim($paragraph)) {
           $paragraphs[$index] .= $closing_p;
