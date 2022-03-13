@@ -268,6 +268,122 @@ function tpnextrasplugin_shortcode_newsletterform_insert($content) {
   return $content;
 }
 
+function tpnextrasplugin_shortcode_storylink($attrs = [], $content = null, $tag = '') {
+  $attrs = array_change_key_case((array) $attrs, CASE_LOWER);
+
+  $post_url = get_permalink($attrs['id']);
+  $image_url = get_the_post_thumbnail_url($attrs['id'], 'post-thumbnail');
+  $image_caption = get_the_post_thumbnail_caption($attrs['id']);
+  $title = get_the_title($attrs['id']);
+  $jobtitle = get_post_meta($attrs['id'])['jobtitle'][0];
+
+  $formatted_byline = '';
+  $byline = get_post_meta($attrs['id'])['writer'];
+  if (count($byline) >= 1) {
+    $formatted_byline = $byline[0];
+  }
+
+  if (count($byline) == 2) {
+    $formatted_byline .= ' and' . $byline[1];
+  } else if (count($byline) > 2) {
+    for ($i = 1; $i < count($byline) - 1; $i++) {
+      $formatted_byline .= ', ' . $byline[$i];
+    }
+
+    $formatted_byline .= ' and ' . $byline[count($byline) - 1];
+  }
+
+  return '
+<style>
+  .jm-outer-wrap { margin-left: 5vw; }
+
+  .jm-inner-wrap {
+    width: 85%;
+    border-radius: 10px;
+    background: #f7f7f7;
+    margin-bottom: 15px;
+    border: 1px solid #f7f7f7;
+  }
+
+  .jm-text-wrap {
+    margin-top: 10px;
+    padding-right: 0px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+  }
+
+  .jm-text-headline {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .jm-text-byline {
+    padding-top: 20px;
+    padding-bottom: 5px;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .jm-photo-wrap {
+    height: auto;
+    width: calc(30% - 15px);
+    float: left;
+    margin-top: 10px;
+    margin-left: 15px;
+    padding-bottom: 10px;
+  }
+
+  .jm-text-wrap-outer {
+    color: #000000;
+    width: calc(70% - 15px);
+    float: left;
+    /* height: unset !important; */
+  }
+
+  @media (max-width: 768px) {
+    .jm-outer-wrap { margin-left: 0; }
+    .jm-inner-wrap { width: 100%; }
+    .jm-text-wrap { padding-top: 0px; }
+    .jm-text-headline { font-size: 18px; }
+    .jm-text-byline { display: none; }
+  }
+</style>
+
+<div class="jm-outer-wrap">
+  <a href="' . $post_url . '">
+    <div class="sno-story-card fw1-panel jm-inner-wrap">
+      <div class="sno-story-card-photo-wrap jm-photo-wrap">
+        <img src="' . $image_url . '" alt="' . $image_caption . '">
+      </div>
+      <div class="sno-story-card-text-wrap jm-text-wrap-outer">
+        <div class="sno-story-card-text-area jm-text-wrap">
+          <div class="sno-story-card-link jm-text-headline"><span>' . $title . '</span></div>
+          <div class="jm-text-byline"><span>By ' . $formatted_byline . ', ' . $jobtitle . '</span></div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+';
+}
+
+function tpnextrasplugin_storylink_admin() {
+  if (current_user_can('edit_posts') && current_user_can('edit_pages')) {
+    add_filter('mce_external_plugins', 'tpnextrasplugin_storylink_admin_plugin');
+    add_filter('mce_buttons', 'tpnextrasplugin_storylink_admin_button');
+  }
+}
+
+function tpnextrasplugin_storylink_admin_button($buttons) {
+  array_push($buttons, '|', 'tpnextrasplugin_storylink');
+  return $buttons;
+}
+
+function tpnextrasplugin_storylink_admin_plugin($plugins) {
+  $plugins['tpnextrasplugin_storylink'] = plugin_dir_url( __FILE__ ) . 'storylink-admin-v1.js';
+  return $plugins;
+}
+
 /**
  * Activate the plugin.
  */
@@ -280,6 +396,9 @@ add_shortcode('tpnextrasplugin_charlottechamps_teaser', 'tpnextrasplugin_shortco
 
 add_shortcode('tpnextrasplugin_newsletterform', 'tpnextrasplugin_shortcode_newsletterform');
 //add_filter('the_content', 'tpnextrasplugin_shortcode_newsletterform_insert');
+
+add_shortcode('tpnextrasplugin_storylink', 'tpnextrasplugin_shortcode_storylink');
+add_action('admin_init', 'tpnextrasplugin_storylink_admin');
 
 //}
 //register_activation_hook( __FILE__, 'tpnextrasplugin_activate' );
