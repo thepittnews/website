@@ -109,8 +109,7 @@ function tpnextrasplugin_shortcode_newsletterform() {
 
   @media (min-width: 768px) {
     .tpn-newsletter-widget-container {
-      width: 40%;
-      /*float: right;*/
+      width: 100%;
     }
   }
 
