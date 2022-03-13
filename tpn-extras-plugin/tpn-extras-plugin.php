@@ -110,7 +110,7 @@ function tpnextrasplugin_shortcode_newsletterform() {
   @media (min-width: 768px) {
     .tpn-newsletter-widget-container {
       width: 40%;
-      float: right;
+      /*float: right;*/
     }
   }
 
@@ -279,7 +279,7 @@ add_shortcode('tpnextrasplugin_covid19_cases_chart', 'tpnextrasplugin_shortcode_
 add_shortcode('tpnextrasplugin_charlottechamps_teaser', 'tpnextrasplugin_shortcode_charlottechamps_teaser');
 
 add_shortcode('tpnextrasplugin_newsletterform', 'tpnextrasplugin_shortcode_newsletterform');
-add_filter('the_content', 'tpnextrasplugin_shortcode_newsletterform_insert');
+//add_filter('the_content', 'tpnextrasplugin_shortcode_newsletterform_insert');
 
 //}
 //register_activation_hook( __FILE__, 'tpnextrasplugin_activate' );
