@@ -367,6 +367,23 @@ function tpnextrasplugin_shortcode_storylink($attrs = [], $content = null, $tag 
 ';
 }
 
+function tpnextrasplugin_storylink_admin() {
+  if (current_user_can('edit_posts') && current_user_can('edit_pages')) {
+    add_filter('mce_external_plugins', 'tpnextrasplugin_storylink_admin_plugin');
+    add_filter('mce_buttons', 'tpnextrasplugin_storylink_admin_button');
+  }
+}
+
+function tpnextrasplugin_storylink_admin_button($buttons) {
+  array_push($buttons, '|', 'tpnextrasplugin_storylink');
+  return $buttons;
+}
+
+function tpnextrasplugin_storylink_admin_plugin($plugins) {
+  $plugins['tpnextrasplugin_storylink'] = plugin_dir_url( __FILE__ ) . 'storylink-admin-v1.js';
+  return $plugins;
+}
+
 /**
  * Activate the plugin.
  */
@@ -381,6 +398,7 @@ add_shortcode('tpnextrasplugin_newsletterform', 'tpnextrasplugin_shortcode_newsl
 add_filter('the_content', 'tpnextrasplugin_shortcode_newsletterform_insert');
 
 add_shortcode('tpnextrasplugin_storylink', 'tpnextrasplugin_shortcode_storylink');
+add_action('admin_init', 'tpnextrasplugin_storylink_admin');
 
 //}
 //register_activation_hook( __FILE__, 'tpnextrasplugin_activate' );
