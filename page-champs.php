@@ -167,8 +167,12 @@ $photographer = get_post_meta($featured_image_id, 'photographer', true);
       <div class="container">
         <div class="row">
           <div class="col s12 m11">
-            <?php the_content(); ?>
-            <br />
+            <?php echo apply_filters('the_content', $post->post_content); ?>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m11">
             <h4>The latest from Charlotte and the postseason:</h4>
           </div>
         </div>
