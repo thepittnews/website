@@ -270,15 +270,16 @@ function tpnextrasplugin_shortcode_newsletterform_insert($content) {
 
 function tpnextrasplugin_shortcode_storylink($attrs = [], $content = null, $tag = '') {
   $attrs = array_change_key_case((array) $attrs, CASE_LOWER);
+  $post_id = $attrs['id'];
 
-  $post_url = get_permalink($attrs['id']);
-  $image_url = get_the_post_thumbnail_url($attrs['id'], 'post-thumbnail');
-  $image_caption = get_the_post_thumbnail_caption($attrs['id']);
-  $title = get_the_title($attrs['id']);
-  $jobtitle = get_post_meta($attrs['id'])['jobtitle'][0];
+  $post_url = get_permalink($post_id);
+  $image_url = get_the_post_thumbnail_url($post_id, 'post-thumbnail');
+  $image_caption = get_the_post_thumbnail_caption($post_id);
+  $title = get_the_title($post_id);
+  $jobtitle = get_post_meta($post_id)['jobtitle'][0];
 
   $formatted_byline = '';
-  $byline = get_post_meta($attrs['id'])['writer'];
+  $byline = get_post_meta($post_id)['writer'];
   if (count($byline) >= 1) {
     $formatted_byline = $byline[0];
   }
