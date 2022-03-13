@@ -295,9 +295,9 @@ function tpnextrasplugin_shortcode_storylink($attrs = [], $content = null, $tag 
 
   return '
 <style>
-  .jm-outer-wrap { margin-left: 5vw; }
+  .tpn-storylink-outer-wrap { margin-left: 5vw; }
 
-  .jm-inner-wrap {
+  .tpn-storylink-inner-wrap {
     width: 85%;
     border-radius: 10px;
     background: #f7f7f7;
@@ -305,26 +305,26 @@ function tpnextrasplugin_shortcode_storylink($attrs = [], $content = null, $tag 
     border: 1px solid #f7f7f7;
   }
 
-  .jm-text-wrap {
+  .tpn-storylink-text-wrap {
     margin-top: 10px;
     padding-right: 0px;
     padding-left: 15px;
     padding-bottom: 5px;
   }
 
-  .jm-text-headline {
+  .tpn-storylink-text-headline {
     font-size: 20px;
     line-height: 24px;
   }
 
-  .jm-text-byline {
+  .tpn-storylink-text-byline {
     padding-top: 20px;
     padding-bottom: 5px;
     font-weight: 400;
     font-size: 14px;
   }
 
-  .jm-photo-wrap {
+  .tpn-storylink-photo-wrap {
     height: auto;
     width: calc(30% - 15px);
     float: left;
@@ -333,32 +333,32 @@ function tpnextrasplugin_shortcode_storylink($attrs = [], $content = null, $tag 
     padding-bottom: 10px;
   }
 
-  .jm-text-wrap-outer {
+  .tpn-storylink-text-wrap-outer {
     color: #000000;
     width: calc(70% - 15px);
     float: left;
-    /* height: unset !important; */
   }
 
   @media (max-width: 768px) {
-    .jm-outer-wrap { margin-left: 0; }
-    .jm-inner-wrap { width: 100%; }
-    .jm-text-wrap { padding-top: 0px; }
-    .jm-text-headline { font-size: 18px; }
-    .jm-text-byline { display: none; }
+    .tpn-storylink-outer-wrap { margin-left: 0; }
+    .tpn-storylink-inner-wrap { width: 100%; }
+    .tpn-storylink-text-wrap { padding-top: 0px; }
+    .tpn-storylink-text-headline { font-size: 18px; }
+    .tpn-storylink-text-byline { display: none; }
   }
 </style>
 
-<div class="jm-outer-wrap">
+<div class="tpn-storylink-outer-wrap">
   <a href="' . $post_url . '">
-    <div class="sno-story-card fw1-panel jm-inner-wrap">
-      <div class="sno-story-card-photo-wrap jm-photo-wrap">
+    <div class="sno-story-card fw1-panel tpn-storylink-inner-wrap">
+      <div class="sno-story-card-photo-wrap tpn-storylink-photo-wrap">
         <img src="' . $image_url . '" alt="' . $image_caption . '">
       </div>
-      <div class="sno-story-card-text-wrap jm-text-wrap-outer">
-        <div class="sno-story-card-text-area jm-text-wrap">
-          <div class="sno-story-card-link jm-text-headline"><span>' . $title . '</span></div>
-          <div class="jm-text-byline"><span>By ' . $formatted_byline . ', ' . $jobtitle . '</span></div>
+
+      <div class="sno-story-card-text-wrap tpn-storylink-text-wrap-outer">
+        <div class="sno-story-card-text-area tpn-storylink-text-wrap">
+          <div class="sno-story-card-link tpn-storylink-text-headline"><span>' . $title . '</span></div>
+          <div class="tpn-storylink-text-byline"><span>By ' . $formatted_byline . ', ' . $jobtitle . '</span></div>
         </div>
       </div>
     </div>
