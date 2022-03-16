@@ -9,11 +9,18 @@
 
     // Add shortcode to story
     editor.addCommand('tpnextrasplugin_storylink', function() {
-      var result = prompt('Enter the story ID');
+      var result = prompt('Enter the story URL');
       if (!result) return;
       if (result.length === 0) return;
 
-      editor.execCommand('mceInsertContent', false, '\n[tpnextrasplugin_storylink id="' + result + '"]');
+      var match = result.match(/https:\/\/pittnews.com\/article\/(\d+)\/*/);
+
+      if (match === null) {
+        alert('Invalid story URL: ' + result);
+      } else {
+        var storyId = match[1];
+        editor.execCommand('mceInsertContent', false, '\n[tpnextrasplugin_storylink id="' + storyId + '"]');
+      }
     });
   });
 })();
