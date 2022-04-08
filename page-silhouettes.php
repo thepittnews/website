@@ -76,6 +76,10 @@
       font-size: 56px;
       margin: 40px;
     }
+
+    .yearTitle small {
+      font-size: 32px;
+    }
   </style>
 
 <?php get_header(); ?>
@@ -91,7 +95,7 @@
   foreach($categories as $category) {
 ?>
 
-<h1 class="yearTitle"><?php echo $category->name; ?></h1>
+<h1 class="yearTitle"><?php echo $category->name; ?> <small><? echo $category->description ?></small></h1>
 
 <div class="yearContainer">
 <?php
