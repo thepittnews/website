@@ -191,6 +191,7 @@ $photographer = explode(" | ",get_post_meta($thumbnail_id, 'photographer', true)
         object-position: top center;
       }
 
+      figure.wp-caption { margin: 0 auto !important; text-align: center !important; }
       .aligncenter { margin: 0 auto; text-align: center; }
       .wp-caption-text { font-style: italic; }
       img.size-large { height: auto; width: 100% }
