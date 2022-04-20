@@ -384,6 +384,48 @@ function tpnextrasplugin_storylink_admin_plugin($plugins) {
   return $plugins;
 }
 
+function tpnextrasplugin_page_attributes($post) {
+  $pageCategory = get_post_meta($post->ID, 'tpnextrasplugin_page_category', true);
+  $pageAfterDate = 0;
+  $pageBeforeDate = 0;
+?>
+
+  <hr style="margin: 1em 0;">
+
+  <p class="post-attributes-label-wrapper page-tpn-category-label-wrapper">
+    FOR XYZ ONLY
+  </p>
+
+  <p class="post-attributes-label-wrapper page-tpn-category-label-wrapper">
+    <label class="post-attributes-label" for="tpnextrasplugin_page_category">Posts: Category</label>
+  </p>
+
+  <p class="post-attributes-label-wrapper page-tpn-start-date-label-wrapper">
+    <label class="post-attributes-label" for="tpnextrasplugin_page_after_date">Posts: After date</label>
+  </p>
+
+  <p class="post-attributes-label-wrapper page-tpn-end-date-label-wrapper">
+    <label class="post-attributes-label" for="tpnextrasplugin_page_before_date">Posts: Before date</label>
+  </p>
+<?php
+}
+
+function tpnextrasplugin_page_attributes_save($post_id, $post, $update) {
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+  if (! current_user_can('edit_post', $post_id)) return;
+
+  $fields = array('tpnextrasplugin_page_category');
+
+  foreach($fields as $field) {
+    if (isset ($_POST[$field])) {
+      if (metadata_exists('post', $post_id, $field)) {
+        update_post_meta($post_id, $field, intval($_POST[$field]));
+      } else {
+        create_post_meta($post_id, $field, intval($_POST[$field]));
+    }
+  }
+}
+
 /**
  * Activate the plugin.
  */
@@ -399,6 +441,9 @@ add_shortcode('tpnextrasplugin_newsletterform', 'tpnextrasplugin_shortcode_newsl
 
 add_shortcode('tpnextrasplugin_storylink', 'tpnextrasplugin_shortcode_storylink');
 add_action('admin_init', 'tpnextrasplugin_storylink_admin');
+
+add_action('page_attributes_misc_attributes', 'tpnextrasplugin_page_attributes');
+add_action('save_post', 'tpnextrasplugin_page_attributes_save');
 
 //}
 //register_activation_hook( __FILE__, 'tpnextrasplugin_activate' );
