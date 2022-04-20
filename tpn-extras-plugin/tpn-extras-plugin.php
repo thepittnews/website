@@ -62,7 +62,6 @@ function tpnextrasplugin_rest_add_custom_fields() {
 
 add_action('rest_api_init', 'tpnextrasplugin_rest_add_custom_fields');
 
-//[tpnextrasplugin_covid19_cases_chart]
 function tpnextrasplugin_shortcode_covid19_cases_chart() {
   return '
 <!-- START CHART -->
@@ -76,7 +75,6 @@ function tpnextrasplugin_shortcode_covid19_cases_chart() {
 ';
 }
 
-//[tpnextrasplugin_charlottechamps_teaser]
 function tpnextrasplugin_shortcode_charlottechamps_teaser() {
   return '
 <section>
@@ -235,38 +233,6 @@ function tpnextrasplugin_shortcode_newsletterform() {
 ';
 }
 
-function tpnextrasplugin_shortcode_newsletterform_insert($content) {
-  $post_id = get_the_ID();
-
-  if (is_single() && ! is_admin() && get_post_meta($post_id, 'sno_format', true) != 'Long-Form') {
-    $newsletter_form = tpnextrasplugin_shortcode_newsletterform();
-    $closing_p = '</p>';
-
-    $paragraphs = explode($closing_p, $content);
-    $paragraph_id = 4;
-
-    if (count($paragraphs) - 1 > $paragraph_id) {
-      if (str_contains($paragraphs[$paragraph_id], 'img')) {
-        $paragraph_id = 6;
-      }
-
-      foreach ($paragraphs as $index => $paragraph) {
-        if (trim($paragraph)) {
-          $paragraphs[$index] .= $closing_p;
-        }
-
-        if ($index + 1 == $paragraph_id) {
-          $paragraphs[$index] .= $newsletter_form;
-        }
-      }
-    }
-
-    return implode('', $paragraphs);
-  }
-
-  return $content;
-}
-
 function tpnextrasplugin_shortcode_storylink($attrs = [], $content = null, $tag = '') {
   $attrs = array_change_key_case((array) $attrs, CASE_LOWER);
   $post_id = $attrs['id'];
@@ -387,7 +353,6 @@ function tpnextrasplugin_storylink_admin_plugin($plugins) {
 /**
  * Activate the plugin.
  */
-//function tpnextrasplugin_activate() {
 tpnextrasplugin_rest_add_custom_fields();
 
 add_shortcode('tpnextrasplugin_covid19_cases_chart', 'tpnextrasplugin_shortcode_covid19_cases_chart');
@@ -395,11 +360,7 @@ add_shortcode('tpnextrasplugin_covid19_cases_chart', 'tpnextrasplugin_shortcode_
 add_shortcode('tpnextrasplugin_charlottechamps_teaser', 'tpnextrasplugin_shortcode_charlottechamps_teaser');
 
 add_shortcode('tpnextrasplugin_newsletterform', 'tpnextrasplugin_shortcode_newsletterform');
-//add_filter('the_content', 'tpnextrasplugin_shortcode_newsletterform_insert');
 
 add_shortcode('tpnextrasplugin_storylink', 'tpnextrasplugin_shortcode_storylink');
 add_action('admin_init', 'tpnextrasplugin_storylink_admin');
-
-//}
-//register_activation_hook( __FILE__, 'tpnextrasplugin_activate' );
 ?>
