@@ -255,7 +255,7 @@ $photographer = explode(" | ",get_post_meta($thumbnail_id, 'photographer', true)
             <?php echo do_shortcode(wpautop(get_the_content())); ?>
             <div class="card card-small blue-grey darken-1">
               <div class="card-content white-text">
-                <a class="silhouettes-teaser" href="https://pittnews.com/silhouettes/">Read more silhouettes from The Pitt News</a>
+                <a class="silhouettes-teaser" href="https://pittnews.com/silhouettes/">Read more Silhouettes from The Pitt News</a>
               </div>
             </div>
           </div>
